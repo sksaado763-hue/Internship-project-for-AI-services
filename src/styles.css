@@ -569,6 +569,16 @@ img, svg { display: block; }
 .tool-back-link a:hover { color: var(--brand-strong); }
 .tool-form-stack { display: grid; gap: 18px; }
 .tool-form-section { display: grid; gap: 9px; }
+.regex-match-list { display: grid; max-height: 340px; overflow: auto; gap: 8px; }
+.regex-match { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 12px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--page); }
+.regex-match code { min-width: 0; overflow-wrap: anywhere; color: var(--brand-strong); font-size: 12px; }
+.regex-match span, .regex-match small { color: var(--muted); font-size: 10px; }
+.regex-match small { grid-column: 1 / -1; }
+.tool-editor-label strong { display: inline-flex; align-items: center; gap: 6px; color: var(--ink); font-size: 11px; }
+.base-result-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.base-result { display: grid; gap: 7px; color: var(--muted); font-size: 10px; }
+.base-result .tool-value-input { min-width: 0; font-family: ui-monospace, SFMono-Regular, Consolas, monospace; }
+.tool-value-input:is(select) { appearance: auto; }
 .conversion-result { display: grid; grid-template-columns: minmax(100px, .35fr) 1fr; gap: 8px 14px; border: 1px solid var(--line); border-radius: 11px; padding: 14px; background: var(--surface-soft); overflow-wrap: anywhere; }
 .conversion-result strong { color: var(--muted); font-size: 10px; }
 .conversion-result span { color: var(--ink); font-size: 11px; font-variant-numeric: tabular-nums; }
@@ -580,6 +590,28 @@ img, svg { display: block; }
 .gradient-color-control, .gradient-angle-control { display: flex; flex-direction: column; gap: 7px; color: var(--ink-soft); font-size: 10px; font-weight: 650; }
 .gradient-angle-control span { color: var(--muted); font-weight: 500; }
 .gradient-angle-control input { width: 100%; accent-color: var(--brand); }
+.diff-input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 14px; }
+.diff-textarea { min-height: 175px; }
+.diff-legend { display: flex; flex-wrap: wrap; gap: 14px; color: var(--muted); font-size: 10px; }
+.diff-legend-added { color: var(--green); }
+.diff-legend-removed { color: #ff9a83; }
+.diff-controls { margin-top: 12px; }
+.diff-result { max-height: 420px; overflow: auto; margin-top: 16px; border: 1px solid var(--line); border-radius: 11px; background: var(--surface-soft); }
+.diff-line { display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 8px; min-height: 29px; border-bottom: 1px solid color-mix(in srgb, var(--line) 72%, transparent); padding: 6px 10px; font: 11px/1.5 ui-monospace, SFMono-Regular, Consolas, monospace; }
+.diff-line:last-child { border-bottom: 0; }
+.diff-line code { overflow-wrap: anywhere; white-space: pre-wrap; color: var(--ink-soft); }
+.diff-marker { color: var(--muted); text-align: center; }
+.diff-line--added { background: color-mix(in srgb, var(--green) 10%, transparent); }
+.diff-line--added code, .diff-line--added .diff-marker { color: var(--green); }
+.diff-line--removed { background: color-mix(in srgb, #ff765d 10%, transparent); }
+.diff-line--removed code, .diff-line--removed .diff-marker { color: #ff9a83; }
+.diff-empty { margin: 0; padding: 14px; color: var(--muted); font-size: 11px; }
+.diff-copy { justify-content: flex-end; margin-top: 10px; }
+.calculator-section-title { margin: 0; color: var(--ink); font-size: 13px; }
+.calculator-input-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.calculator-result { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 0; border: 1px solid var(--line); border-radius: 11px; padding: 14px; background: var(--surface-soft); }
+.calculator-result span { color: var(--muted); font-size: 10px; }
+.calculator-result strong { color: var(--brand-strong); font-size: 17px; font-variant-numeric: tabular-nums; }
 
 @media (max-width: 1180px) {
   .directory-page .tool-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -625,4 +657,7 @@ img, svg { display: block; }
   .tool-privacy-note { align-items: flex-start; font-size: 8px; line-height: 1.5; }
   .gradient-controls { grid-template-columns: 1fr 1fr; }
   .gradient-angle-control { grid-column: 1 / -1; }
+  .diff-input-grid { grid-template-columns: 1fr; }
+  .diff-controls { align-items: flex-start; flex-direction: column; }
+  .calculator-input-grid { grid-template-columns: 1fr; }
 }
