@@ -2,6 +2,8 @@ import { Binary, Blend, Braces, CaseSensitive, Clock3, FileText, Fingerprint, Ke
 import { categoryRegistry } from '../../../shared/toolCategories.js';
 import { toolRegistry } from '../../../shared/toolRegistry.js';
 
+
+
 const icons = { Binary, Blend, Braces, CaseSensitive, Clock3, FileText, Fingerprint, KeyRound, Link2, Palette, Type };
 const categoriesBySlug = Object.fromEntries(categoryRegistry.map((category) => [category.slug, category]));
 
