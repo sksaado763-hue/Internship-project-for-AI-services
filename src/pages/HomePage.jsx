@@ -1,7 +1,9 @@
-import { ArrowDown, ArrowRight, ArrowUpRight, Calculator, Code2, FileText, Image, LockKeyhole, Sparkles, TrendingUp, Zap } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, Calculator, Code2, FileText, Image, LockKeyhole, Sparkles, TrendingUp, WandSparkles, Zap } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Badge from '../components/common/Badge.jsx';
 import Button from '../components/common/Button.jsx';
 import SearchField from '../components/common/SearchField.jsx';
+import FeatureMarquee from '../components/common/FeatureMarquee.jsx';
 import { platformStats, toolCategories } from '../data/siteContent.js';
 import ToolCard from '../components/common/ToolCard.jsx';
 import { tools } from '../data/tools.js';
@@ -13,6 +15,7 @@ const categoryIcons = {
   Image,
   PDF: FileText,
   Calculators: Calculator,
+  'AI & Smart Generators': WandSparkles,
 };
 
 export default function HomePage({ searchTerm, onSearchTermChange, onSearchSubmit }) {
@@ -52,7 +55,7 @@ export default function HomePage({ searchTerm, onSearchTermChange, onSearchSubmi
           <div className="dashboard-window">
             <div className="dashboard-window-header">
               <span className="dashboard-window-controls"><i /><i /><i /></span>
-              <span className="dashboard-brand-label">Meridian workspace</span>
+              <span className="dashboard-brand-label">HavitGrowth workspace</span>
               <span className="dashboard-status"><span /> READY</span>
             </div>
             <div className="dashboard-stat-grid">
@@ -84,6 +87,8 @@ export default function HomePage({ searchTerm, onSearchTermChange, onSearchSubmi
           ))}
         </div>
       </section>
+
+      <FeatureMarquee />
 
       <section className="category-section page-container" id="categories" aria-labelledby="category-title">
         <div className="section-heading">
@@ -128,7 +133,7 @@ export default function HomePage({ searchTerm, onSearchTermChange, onSearchSubmi
         <div className="principles-copy">
           <Badge tone="neutral">A MORE THOUGHTFUL TOOLBOX</Badge>
           <h2 id="principles-title">Useful should feel simple.</h2>
-          <p>Small jobs deserve tools that are quick to understand and easy to trust. Meridian keeps the experience focused from the first click.</p>
+          <p>Small jobs deserve tools that are quick to understand and easy to trust. HavitGrowth keeps the experience focused from the first click.</p>
         </div>
         <div className="principle-list">
           <article className="principle-item"><span className="principle-index">01</span><div><h3>Made for the task</h3><p>Clear interfaces that get out of your way.</p></div><Zap size={17} aria-hidden="true" /></article>
@@ -138,11 +143,11 @@ export default function HomePage({ searchTerm, onSearchTermChange, onSearchSubmi
       </section>
 
       <section className="journal-section page-container" id="blog" aria-labelledby="journal-title">
-        <div className="journal-card">
+        <Link className="journal-card" to="/blog">
           <div className="journal-mark" aria-hidden="true"><span>m</span></div>
-          <div><Badge tone="neutral">FIELD NOTES · COMING SOON</Badge><h2 id="journal-title">Ideas for getting good work done.</h2><p>Short reads on useful workflows, thoughtful tools, and making room for focus.</p></div>
+          <div><Badge tone="neutral">HAVITGROWTH GUIDES</Badge><h2 id="journal-title">Ideas for getting good work done.</h2><p>Short reads on useful workflows, thoughtful tools, and making room for focus.</p></div>
           <span className="journal-arrow" aria-hidden="true"><ArrowUpRight size={18} /></span>
-        </div>
+        </Link>
       </section>
     </>
   );

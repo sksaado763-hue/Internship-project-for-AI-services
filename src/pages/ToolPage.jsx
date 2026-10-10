@@ -19,8 +19,22 @@ import NumberBaseConverterTool from '../components/tools/NumberBaseConverterTool
 import LoremIpsumGeneratorTool from '../components/tools/LoremIpsumGeneratorTool.jsx';
 import TextDiffCheckerTool from '../components/tools/TextDiffCheckerTool.jsx';
 import CsvToJsonTool from '../components/tools/CsvToJsonTool.jsx';
+import JsonToCsvTool from '../components/tools/JsonToCsvTool.jsx';
 import MarkdownTableGeneratorTool from '../components/tools/MarkdownTableGeneratorTool.jsx';
 import PercentageCalculatorTool from '../components/tools/PercentageCalculatorTool.jsx';
+import FinancialCalculatorTool from '../components/tools/FinancialCalculatorTool.jsx';
+import ImageUpscalerTool from '../components/tools/ImageUpscalerTool.jsx';
+import FakeChatGeneratorTool from '../components/tools/FakeChatGeneratorTool.jsx';
+import YoutubeThumbnailTool from '../components/tools/YoutubeThumbnailTool.jsx';
+import ResumeBuilderTool from '../components/tools/ResumeBuilderTool.jsx';
+import PowerPointGeneratorTool from '../components/tools/PowerPointGeneratorTool.jsx';
+import VideoEditingStudioTool from '../components/tools/VideoEditingStudioTool.jsx';
+import InstagramCarouselMakerTool from '../components/tools/InstagramCarouselMakerTool.jsx';
+import InstagramGridSplitterTool from '../components/tools/InstagramGridSplitterTool.jsx';
+import SocialMediaDownloaderTool from '../components/tools/SocialMediaDownloaderTool.jsx';
+import YouTubeChannelAuditTool from '../components/tools/YouTubeChannelAuditTool.jsx';
+import YouTubeCommentPickerTool from '../components/tools/YouTubeCommentPickerTool.jsx';
+import AiGeneratorDemoTool from '../components/tools/AiGeneratorDemoTool.jsx';
 import { toolBySlug } from '../data/tools.js';
 
 const toolInterfaces = {
@@ -42,8 +56,29 @@ const toolInterfaces = {
   'lorem-ipsum-generator': LoremIpsumGeneratorTool,
   'text-diff-checker': TextDiffCheckerTool,
   'csv-to-json': CsvToJsonTool,
+  'json-to-csv': JsonToCsvTool,
   'markdown-table-generator': MarkdownTableGeneratorTool,
   'percentage-calculator': PercentageCalculatorTool,
+  'age-calculator': FinancialCalculatorTool,
+  'amortization-calculator': FinancialCalculatorTool,
+  'auto-loan-calculator': FinancialCalculatorTool,
+  'unit-converter': FinancialCalculatorTool,
+  'bmi-calculator': FinancialCalculatorTool,
+  'bmr-calculator': FinancialCalculatorTool,
+  'body-fat-calculator': FinancialCalculatorTool,
+  'calorie-calculator': FinancialCalculatorTool,
+  'image-upscaler': ImageUpscalerTool,
+  'fake-chat-generator': FakeChatGeneratorTool,
+  'youtube-thumbnail-downloader': YoutubeThumbnailTool,
+  'video-editing-studio': VideoEditingStudioTool,
+  'instagram-carousel-maker': InstagramCarouselMakerTool,
+  'instagram-downloader': SocialMediaDownloaderTool,
+  'instagram-grid-splitter': InstagramGridSplitterTool,
+  'tiktok-downloader': SocialMediaDownloaderTool,
+  'youtube-channel-audit': YouTubeChannelAuditTool,
+  'youtube-comment-picker': YouTubeCommentPickerTool,
+  'resume-builder': ResumeBuilderTool,
+  'ai-powerpoint-generator': PowerPointGeneratorTool,
 };
 
 export default function ToolPage() {
@@ -52,5 +87,6 @@ export default function ToolPage() {
   if (!tool) return <NotFoundPage />;
   const ToolInterface = toolInterfaces[slug];
 
-  return <ToolLayout tool={tool}><ToolInterface /></ToolLayout>;
+  const Interface = ToolInterface ?? AiGeneratorDemoTool;
+  return <ToolLayout tool={tool}><Interface tool={tool} /></ToolLayout>;
 }

@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { Boxes, ChevronDown, Menu, Moon, Search, Sun, X } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Boxes, Heart, Menu, Moon, Search, Sun, X } from 'lucide-react';
 import Button from '../common/Button.jsx';
 import SearchField from '../common/SearchField.jsx';
-import { mainNavigation } from '../../data/siteContent.js';
 import { useTheme } from '../../context/ThemeContext.jsx';
+import { mainNavigation } from '../../data/siteContent.js';
 
 export default function Navbar({ searchTerm, onSearchTermChange, onSearchSubmit, onLogin }) {
-  const { theme, toggleTheme } = useTheme();
   const location = useLocation();
+  const { theme, toggleTheme } = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [activeHash, setActiveHash] = useState(`${window.location.pathname}${window.location.hash || '#home'}`);
@@ -46,18 +46,25 @@ export default function Navbar({ searchTerm, onSearchTermChange, onSearchSubmit,
         {mainNavigation.map((item) => {
           const isActive = item.href === '/tools'
             ? location.pathname.startsWith('/tools')
-            : activeHash === item.href || (activeHash === '' && item.href === '/#home');
+            : item.href === '/games'
+              ? location.pathname.startsWith('/games')
+            : item.href === '/blog'
+              ? location.pathname.startsWith('/blog')
+              : item.href === '/about'
+                ? location.pathname === '/about'
+                : activeHash === item.href || (activeHash === '' && item.href === '/#home');
+          const isExternal = item.href.startsWith('mailto:');
+          const NavigationLink = isExternal ? 'a' : Link;
           return (
-            <a
+            <NavigationLink
               key={item.label}
               className={`nav-link ${isActive ? 'is-active' : ''}`}
-              href={item.href}
+              {...(isExternal ? { href: item.href } : { to: item.href })}
               aria-current={isActive ? 'page' : undefined}
               onClick={onNavigate}
             >
               {item.label}
-              {item.label === 'Categories' && <ChevronDown className="nav-chevron" size={13} aria-hidden="true" />}
-            </a>
+            </NavigationLink>
           );
         })}
       </nav>
@@ -67,14 +74,20 @@ export default function Navbar({ searchTerm, onSearchTermChange, onSearchSubmit,
   return (
     <header className="site-header">
       <div className="nav-shell page-container">
-        <a className="brand" href="/#home" aria-label="Meridian Tools home">
-          <span className="brand-mark"><Boxes size={31} strokeWidth={2.2} aria-hidden="true" /></span>
-          <span>meridian<span className="brand-light">.tools</span></span>
-        </a>
+        <Link className="brand" to="/#home" aria-label="HavitGrowth home">
+          <span className="brand-mark"><Boxes size={49} strokeWidth={2.2} aria-hidden="true" /></span>
+          <span>Havit<span className="brand-light">Growth</span></span>
+        </Link>
 
         {renderNavigation('desktop-nav')}
 
         <div className="nav-actions">
+          <Link className="icon-button nav-favorites-toggle" to="/tools?category=Favorites" aria-label="View favorite tools" title="Favorite tools">
+            <Heart size={19} aria-hidden="true" />
+          </Link>
+          <button className="icon-button nav-theme-toggle" type="button" onClick={toggleTheme} aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`} title={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}>
+            {theme === 'light' ? <Moon size={18} aria-hidden="true" /> : <Sun size={18} aria-hidden="true" />}
+          </button>
           <button
             className={`icon-button nav-search-toggle ${searchOpen ? 'is-selected' : ''}`}
             type="button"
@@ -85,17 +98,6 @@ export default function Navbar({ searchTerm, onSearchTermChange, onSearchSubmit,
           >
             {searchOpen ? <X size={18} /> : <Search size={18} />}
           </button>
-          <button
-            className="icon-button theme-toggle"
-            type="button"
-            onClick={toggleTheme}
-            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
-            title={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
-          >
-            {theme === 'light' ? <Moon size={18} aria-hidden="true" /> : <Sun size={18} aria-hidden="true" />}
-          </button>
-          <button className="login-link" type="button" onClick={onLogin}>Log in</button>
-          <Button as="a" href="/tools" variant="primary" size="small" className="nav-cta">Get started</Button>
           <button
             className="icon-button menu-toggle"
             type="button"
@@ -123,6 +125,10 @@ export default function Navbar({ searchTerm, onSearchTermChange, onSearchSubmit,
         <div className={`mobile-menu ${menuOpen ? 'is-open' : ''}`} id="mobile-menu" aria-hidden={!menuOpen} inert={!menuOpen}>
           {renderNavigation('mobile-nav', () => setMenuOpen(false))}
           <div className="mobile-menu-actions">
+            <button className="mobile-theme-toggle" type="button" onClick={toggleTheme} aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}>
+              {theme === 'light' ? <Moon size={16} aria-hidden="true" /> : <Sun size={16} aria-hidden="true" />}
+              {theme === 'light' ? 'Dark theme' : 'Light theme'}
+            </button>
             <button className="login-link" type="button" onClick={() => { setMenuOpen(false); onLogin(); }}>Log in</button>
             <Button as="a" href="/tools" variant="primary" onClick={() => setMenuOpen(false)}>Get started</Button>
           </div>
