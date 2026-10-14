@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight, ArrowUpRight, Calculator, Code2, FileText, Image, LockKeyhole, Sparkles, TrendingUp, WandSparkles, Zap } from 'lucide-react';
+import { ArrowDown, ArrowRight, ArrowUpRight, Calculator, Clapperboard, Code2, FileText, Image, LockKeyhole, Sparkles, TrendingUp, WandSparkles, Zap } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Badge from '../components/common/Badge.jsx';
 import Button from '../components/common/Button.jsx';
@@ -14,7 +14,8 @@ const categoryIcons = {
   SEO: TrendingUp,
   Image,
   PDF: FileText,
-  Calculators: Calculator,
+  'Calculators & Financial Tools': Calculator,
+  'Social Media & Video Tools': Clapperboard,
   'AI & Smart Generators': WandSparkles,
 };
 
@@ -60,7 +61,7 @@ export default function HomePage({ searchTerm, onSearchTermChange, onSearchSubmi
             </div>
             <div className="dashboard-stat-grid">
               <div className="dashboard-stat dashboard-stat--violet"><span>Speed</span><strong>Instant</strong><small>Runs in your browser</small></div>
-              <div className="dashboard-stat dashboard-stat--blue"><span>Useful tools</span><strong>17</strong><small>Ready for your workflow</small></div>
+              <div className="dashboard-stat dashboard-stat--blue"><span>Useful tools</span><strong>{tools.length}</strong><small>Ready for your workflow</small></div>
               <div className="dashboard-stat dashboard-stat--green"><span>Privacy</span><strong>Local</strong><small>Your text stays yours</small></div>
             </div>
             <div className="dashboard-activity">
@@ -81,7 +82,7 @@ export default function HomePage({ searchTerm, onSearchTermChange, onSearchSubmi
         <div className="stats-grid">
           {platformStats.map((stat) => (
             <div className="stat-item" key={stat.label}>
-              <span className="stat-value">{stat.value}</span>
+              <span className="stat-value">{stat.label === 'Working browser tools' ? tools.length : stat.value}</span>
               <span className="stat-label">{stat.label}</span>
             </div>
           ))}
@@ -102,7 +103,7 @@ export default function HomePage({ searchTerm, onSearchTermChange, onSearchSubmi
 
         <div className="category-grid">
           {toolCategories.map((category, index) => {
-            const Icon = categoryIcons[category.name];
+            const Icon = categoryIcons[category.name] ?? FileText;
             return (
               <a className={`category-card category-card--${category.color}`} href={`/tools?category=${encodeURIComponent(category.name)}`} key={category.name}>
                 <span className="category-icon"><Icon size={19} strokeWidth={1.8} aria-hidden="true" /></span>
